@@ -1,0 +1,1034 @@
+:docinfo:
+include::./common_docinfo_vars.adoc[]
+
+// = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
+// GENERAL COMMENTS
+//   - See the SUSE TRD Contributors Guide for detailed guidance:
+//     https://documentation.suse.com/trd/contributors/single-html/suse-trd_contrib-guide/
+//   - Keep in mind that this is a "getting started" guide.
+//   - Write to the audience you are trying to reach.
+//   - Add or remove sections and subsections as needed.
+// 
+// = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
+
+
+// = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
+// DOCUMENT ATTRIBUTES AND VARIABLES
+//
+// NOTES:
+// 1. Define and use document attributes or variables in this file.
+// 2. Update the docinfo.xml file if needed.
+//
+// = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
+
+
+// - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+// ORGANIZATION
+//   Do NOT modify this section.
+// -
+:trd: Technical Reference Documentation
+:type: Getting Started
+// - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+
+// - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+// DOCUMENT REVISION DATE
+//-
+:revision-date: YYYY-MM-DD
+// - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+// - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+// TECHNICAL COMPONENTS
+//   Identify the technical components featured in the guide.
+//   Use variables to store information about the solution components.
+//   This makes it much easier to update the document for future
+//   version upgrades, URL changes, etc.
+//
+//   Variable names follow a simple pattern:
+//   - for SUSE components: scompX[-MODIFIER]
+//   - for partner/project components: pcompX[-MODIFIER]
+//   where:
+//   - X is an integer starting from 1 for the primary component,
+//     2 for a secondary component, and so on.
+//   - -MODIFIER is text that identifies the stored information.
+//   Some -MODIFIER values include:
+//   - EMPTY: If the modifier is missing, the variable contains
+//     a short name for the component (e.g., 'SLES', 'Rancher Prime')
+//   - -full: Long name of the component
+//     (e.g., 'SUSE Linux Enterprise Server', 'Rancher Prime by SUSE')
+//   - -provider: Name of company or project providing the component
+//     (e.g., 'SUSE', 'HPE', 'Kubeflow', 'Veeam')
+//   - -version: Relevant product version (e.g., '15', '15SP5', '2.7')
+//     or versions (e.g., '15SP4, 15SP5', '15SP3+', '2.6+', '2.x')
+//   - -website: Product website (e.g., https://www.suse.com/products/server/)
+//   - -docs: Product documentation (e.g., https://documentation.suse.com/sles/)
+//
+//   You can create additional modifiers as needed.
+//  
+// -
+// SUSE Components
+// -
+:scomp1-provider: SUSE
+:scomp1: SLES
+:scomp1-full: SUSE Linux Enterprise Server
+:scomp1-version: 15 SP4
+:scomp1-website: www.suse.com/products/server/
+:scomp1-docs: documentation.suse.com/sles/
+
+// -
+// Partner/Project Components
+// -
+:pcomp1-provider: SUSE
+:pcomp1: Rancher
+:pcomp1-full: Rancher Prime by SUSE
+:pcomp1-version: 2.8
+:pcomp1-website: www.rancher.com/products/rancher/
+:pcomp1-docs: ranchermanager.docs.rancher.com
+// - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+:other-product1: ASL-Transformer
+:other-product1-url: github.com/bishal7679/ASL-Transformer
+:other-product2: K3s
+:other-product2-url: k3s.io/
+:other-product2-version: 1.23.17+k3s1
+
+// - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+// DOCUMENT DESCRIPTIONS
+//   Describe the guide by its purpose, use case, value.
+//
+// usecase: (<55 characters) key words or phrases that identify the
+//          use case of this guide
+//          (e.g.: "Database-as-a-Service", "edge analytics in healthcare",
+//                 "Kubernetes-native object storage")
+// description: (<150 characters) brief description of what this guide
+//              provides (e.g.: "Deploy Kubeflow with Rancher Primer")
+// description-short: (<55 characters) condensed description suitable for
+//                    social media (e.g.: "Kubeflow with Rancher")
+// executive-summary: (<300 characters) brief summary of the guide that
+//                    appears near the beginning of the rendered document
+//                    (e.g.: "Kubeflow simplifies deployment of machine
+//                            learning (ML) workflows on Kubernetes clusters.
+//                            This document provides step-by-step guidance
+//                            for deploying Kubeflow on an RKE2 cluster with
+//                            Rancher."
+//
+// -
+:usecase: edge analytics in healthcare
+
+:description: A user-friendly application for converting either audio or text into sign language animations
+
+:description-short: (<55 characters) social media description
+
+:executive-summary: (<300 characters) brief summary
+
+// - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+
+// - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+// CONTRIBUTORS
+//   Specify information about authors, editors, and other
+//   contributors here.
+//   Follow the pattern to provide fist name, surname, job title,
+//   and organization name for each contributor.
+//   NOTE: To list additional authors or others on the cover page,
+//         you must edit the docinfo.xml file as well.
+// -
+:author1-firstname: Bishal
+:author1-surname: Das
+:author1-jobtitle: Google Summer of Code 2023 Contributor
+:author1-orgname: openSUSE
+// :author1_email: bishalhnj127@gmail.com
+// additional contributors:
+// - Bryan Gartner, bryan.gartner@suse.com
+// - Ann Davis, andavis@suse.com
+// - Terry Smith, terry.smith@suse.com
+// - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+
+
+// - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+// MISCELLANEOUS
+//   Define any additional variables here for use within the document.
+:python-version: Python 3.10
+
+
+// - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+
+// = {title}: {subtitle}
+
+
+
+== Introduction
+
+// = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
+// Provide a motivation for the document in 2-4 sentences to identify:
+//   - what the document is about
+//   - why it may be of interest to the reader
+//   - what products are being highlighted
+// Include an approved SUSE | Partner logo lock-up if possible
+// Include any additional, relevant details
+// = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
+
+In light of the significant technological advancements our society has witnessed, it is disheartening that we haven't placed more emphasis on improving accessibility for the deaf community. This issue has been brought into sharp focus through a personal anecdote from one of my friends, whose grandfather is a deaf individual relying predominantly on sign language and visual cues for communication. This firsthand experience spurred my determination to address this pressing concern.
+
+This led me to conceive the idea of ASL-Transformer, an innovative solution designed to automate the translation of English into American Sign Language (ASL), similar to how closed captions make video content accessible to a wider audience. Motivation for developing ASL-Transformer is rooted in a genuine desire to bridge the communication gap and make vital information and content more accessible to the deaf community, enhancing their quality of life and promoting inclusivity in our ever-evolving society.
+
+The modern container landscape, built on open source with Linux and Kubernetes, makes it possible to deploy powerful analytics and machine learning workloads at the edge and at scale.
+By reducing the need for data movement, organizations can improve security, reduce costs, and speed time to insight and time to value.
+
+This project is part of the 2023 https://summerofcode.withgoogle.com/[Google Summer of Code], a global mentoring program focused on introducing new contributors to open source software development.
+Participating Google Summer of Code contributors are paired with mentors from open source organizations (such as https://suse.com/[SUSE]) to gain exposure to real-world software development techniques.
+Contributors learn from experienced open source developers while writing code for real-world projects.
+
+
+=== Scope
+
+// = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
+// Specify what this guide covers in no more than 2 sentences.
+//   E.g., "You will learn how to ..."
+// = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
+
+Edge analytics in the healthcare sector is simplified through the use of modern container technologies.
+This is illustrated by using https://{pcomp1-website}[Rancher] by SUSE to deploy a machine learning model for sign language transformation and a Web-based front-end for user interaction and visualization into a lightweight, https://{other-product2-url}[{other-product2}] Kubernetes cluster. 
+
+
+=== Audience
+
+// = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
+// Identify for whom this document is intended, perhaps with:
+//   - topics of interests (e.g., machine learning, security, etc.)
+//   - job roles (e.g., developer, administrator, platform architect, etc.)
+//   - required skills
+// = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
+
+DevOps, MLOps, developers and data scientists looking to containerize their ML workloads and deploy them anywhere (including at the edge) will find useful guidance in this document.
+To get the most out of this guide, you should have basic familiarity with the Linux command line, Python, Docker, and Kubernetes.
+
+
+== Prerequisites
+
+// = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
+// Identify minimum requirements (prerequisites) the reader
+// would need in order to follow the steps of this guide.
+// - Use an unordered list.
+// - Link to existing resources whenever possible.
+// - Keep this section brief but elaborate as needed.
+// = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
+
+To complete the steps illustrated in this guide, you need the following resources:
+
+* A https://{pcomp1-website}[Rancher] environment.
+//
++
+You can use {pcomp1} or {pcomp1-full} version {pcomp1-version} or later.
+
+* A {other-product2} Kubernetes cluster managed by Rancher.
+//
++
+{other-product2} {other-product2-version} or later should work without modification.
++
+[NOTE]
+====
+K3s is an ideal Kubernetes distribution for edge deployments.
+With {pcomp1} and {pcomp1-full}, you can manage any https://www.cncf.io/certification/software-conformance/#logos[CNCF-certified Kubernetes distribution].
+====
++
+--
+For this guide, your cluster should consist of at least one worker node with the following specifications:
+
+* Processor: 2 vCPUs
+
+* Memory: 4 GB RAM
+
+* Storage: 10 GB (available)
+
+* Operating system: Linux ({scomp1} {scomp1-version} or later is recommended).
+--
+
+* The ability to install and execute https://www.python.org/[Python] programs.
+//
++
+Machine learning software is in rapid development, which can result in version incompatibilities.
+Python {python-version} or later should work with little to no modification.
++
+[TIP]
+====
+See https://documentation.suse.com/trd/linux/single-html/gs_sles_jupyter-jupyterlab/[Replicable Python Environments with JupyterLab and SUSE Linux Enterprise Server] for guidance on setting up your own Python environment.
+====
+
+* A https://hub.docker.com/[Docker Hub] account.
++
+[NOTE]
+====
+In this guide, you push your workload container image to Docker Hub and, later, pull this image for deployment onto your cluster.
+With appropriate command substitutions, any container image repository may be used.
+====
+
+
+== Project Overview
+
+// = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
+// Provide an overview of the solution and the processes detailed
+// in this guide.
+// - Identify components
+// - Describe how the components fit together
+// - Leverage diagrams as appropriate, including (but not limited to):
+//   - component architecture
+//   - data flow diagram
+//   - workflow diagram
+// - Summarize the major steps the reader will perform
+// = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
+
+An overview of this project
+
+This application has three main steps:
+
+* Convert audio to text (skipped when converting text-to-sign)
+
+* Find what movement corresponds to each word
+
+* Animate the movement
+
+This system has the capability to accept two distinct types of input: audio files and text. When an audio file is provided, it transforms the spoken words within the audio into a transcript. Conversely, if text input is supplied, the system takes a different route by generating an animation that conveys the transcript in sign language before proceeding to the subsequent stage. In cases where text input is utilized, the usual process is bypassed, and the program directly generates an animation of the text represented in sign language. Beyond serving as a valuable tool for creating sign language equivalents of closed captions, this system has a broader educational utility. It caters to individuals interested in learning sign language, allowing them to self-educate by practicing various phrases using both the speech-to-sign and text-to-sign functionalities provided by SpeechToSign.
+
+
+
+== Technical Overview
+
+In this guide, you use {pcomp1} to deploy {other-product1}, an audio to sign Language Web application, which you can obtain from the project's https://{other-product1-url}[code repository].
+{other-product1} is discussed in more detail later.
+
+There can be many paths to creating and deploying analytics applications.
+A typical process involves the following steps:
+
+. Collect all the videos from ASL dictionary for the required words spoken in the audio file.
+
+
+. Load the model from whisper to convert the given audio to Transcripted words and then modify those words  so all of them are in the dictionary and save them to a list.
+
+
+. Make a POST request to submit the ASL words and convert it to sign language animation.
+
+
+. Determine handedness based on hand landmarker positions and store the coordinates and joint index to reference.json
+
+
+. Display the video frame with landmarker through OpenCV.
+
+
+. Enable a means of interacting with the model.
++
+In this guide, you deploy a front-end Web application to accept user input and view ASL animations.
+
+
+. Containerize the application.
++
+In this guide, you build a https://docs.docker.com/get-started/overview/[Docker] container.
+
+
+. Define a deployment mechanism.
++
+This is done by creating manifest files.
+
+
+. Deploy the application.
+
+
+
+Some additional components and tools used in this guide or by {other-product1} include:
+
+* Python packages, including https://numpy.org/[numpy] and https://flask.palletsprojects.com/en/2.3.x/[flask] - for managing data and frontend providing.
+
+* https://jupyter.org/[Jupyter Notebook] - an interactive computational environment to explore and visualize data.
+
+* https://openai.com/research/whisper[Whisper API] - to convert given audio into text.
+
+* https://developers.google.com/mediapipe/solutions/vision/hand_landmarker[MediaPipe Hand Landmarker] - to retry the coordinates of each hand.
+
+* https://www.handspeak.com/word/[ASL Dictionary] - to map each word to an array of coordinates.
+
+* https://threejs.org/[Three js] - to animate the set of points.
+
+* https://kubernetes.io/docs/reference/kubectl/[Kubectl] - a command line tool for controlling the Kubernetes cluster manager.
+
+* https://docs.github.com/en/actions/[Github Action] - to create a CI/CD pipeline with aws ECS cluster to make the changes live on production.
+
+
+== ML model
+
+
+In this section, you explore a subset of the {other-product1} code by understanding each procedure and functionality step by step. 
+
+. Using the mediapipe hands and Creating a data dictionary to store the hand cordinates. After then iterating over all the existing video files and opening those files through openCV. 
++
+[source, python]
+----
+with mp_hands.Hands(min_detection_confidence=0.8, min_tracking_confidence=0.5) as hands:
+    data = {}
+    for idx, filename in enumerate(os.listdir(video_folder)):
+        if filename.endswith(".mp4"):
+            video_file = os.path.join(video_folder, filename)
+
+            # Extract the file name without extension
+            file_name = filename.split('.')[0]
+            data[file_name] = []
+
+            # Open video file
+            cap = cv2.VideoCapture(video_file)
+----
+
+. Checking whether hand landmarks are detected from processed results by mediapipe hands. Then determining handedness based on the landmark positions available e.g WRIST, THUMB_CMC.
++
+[source, python]
+----
+  if results.multi_hand_landmarks:
+      # Initialize hand coordinates
+      hand_coordinates = []
+        for hand_landmarks in results.multi_hand_landmarks:
+            hand = hand_landmarks.landmark
+            if hand[mp_hands.HandLandmark.WRIST].x < hand[mp_hands.HandLandmark.THUMB_CMC].x:
+              handedness = "Left"
+            else:
+              handedness = "Right"
+----
+
+. Store coordinates and joint index in the hand coordinates list and draw landmarks on the frame. Finally display the video frame with landmarks.
++
+[source, python]
+----
+for joint_id, landmark in enumerate(hand):
+  x, y, z = landmark.x, landmark.y, landmark.z
+  joint_data = {
+    "Joint Index": joint_id,
+    "Coordinates": [x, y, z]
+  }                          
+  hand_coordinates.append(joint_data)
+
+mp_drawing.draw_landmarks(frame, hand_landmarks, mp_hands.HAND_CONNECTIONS,
+  mp_drawing.DrawingSpec(color=(0, 255, 0), thickness=2, circle_radius=4),
+  mp_drawing.DrawingSpec(color=(0, 0, 255), thickness=2, circle_radius=2))
+
+cv2.imshow('Video', frame)
+if cv2.waitKey(1) & 0xFF == ord('q'):
+  break
+
+----
+
+. Converting byte data to what whisper can use (adapted from https://github.com/openai/whisper/blob/main/whisper/audio.py) and processing the audio.
++
+[source, python]
+----
+def custom_load_audio(byte_data: bytes, sr=SAMPLE_RATE):
+    cmd = [
+        "ffmpeg",
+        "-nostdin",
+        "-threads", "0",
+        "-i", "-",
+        "-f", "s16le",
+        "-ac", "1",
+        "-acodec", "pcm_s16le",
+        "-ar", str(sr),
+        "-"
+    ]
+def process_audio(audio):
+    audio = whisper.pad_or_trim(audio)
+
+    mel = whisper.log_mel_spectrogram(audio).to(model.device)
+
+    options = whisper.DecodingOptions(fp16=False)
+    result = whisper.decode(model, mel, options)
+    return result.text
+----
+
+. Finally making the frontend part of the application ready to access on localhost.
++
+[source, python]
+----
+@app.route("/")
+def home():
+    return render_template('index.html')
+
+
+@app.route("/", methods=['POST'])
+def upload_file():
+    f = request.files['file']
+    rawText = process_audio(custom_load_audio(f.read()))
+    modText = modify_words(rawText)
+    return jsonify({'rawText': rawText, 'modText': modText})
+
+
+if __name__ == '__main__':
+    app.run(host='0.0.0.0')
+----
++
+image::edge-analytics_asl_transformer_running.png[ASL Transformer running, scaledwidth="85%", align="center"]
+
+
+== Front-end
+
+In addition to the ML analytics workload, {other-product1} also provides a Web-based front-end to support user interaction.
+
+=== Features
+
+The front-end application features useful functionality for the user, including:
+
+* Multimodal Input Support: SpeechToSign accepts two primary types of input - audio files and text, offering versatility for content creators and users.
+
+* Audio-to-Text Transcription: When provided with an audio file, the system efficiently transcribes spoken words into written text, facilitating accessibility for the hearing-impaired.
+
+* Text-to-Sign Animation: For text input, SpeechToSign transforms written content into a dynamic sign language animation, enhancing communication accessibility.
+
+* Educational Resource: Beyond its utility for creating sign language equivalents of closed captions, the system serves as a valuable educational tool for individuals interested in learning sign language.
+
+* Interactive Learning: SpeechToSign allows users to practice and learn sign language by offering both speech-to-sign and text-to-sign functionalities, making it a valuable resource for self-education and skill development.
+
+
+=== Components
+
+{other-product1} is composed of the following Python modules:
+
+* https://github.com/bishal7679/ASL-Transformer/blob/main/ASLCoordinateDictionary.py[ASLCoordinateDictionary.py]: Performs all the handlandmarker operation and save the co-ordinates to dictionary.
+
+* https://github.com/bishal7679/ASL-Transformer/blob/main/app.py[app.py]: Process all the backend functions and serve the code to start the application.
+
+
+== Build environment
+
+Create your build environment as follows:
+
+. Clone the {other-product1} code from GitHub into an empty directory.
++
+[source, bash]
+----
+git clone https://github.com/bishal7679/ASL-Transformer.git
+----
+
+. Elsewhere, create your working directory, called 'asl_transformer'.
+
+. Copy all the files listed in the previous section from the cloned 'ASL-Transformer' directory into your working 'as_transformer' directory.
+
+. Now you can run it locally by this command `python app.py` and access it on 'http://localhost:5000'.
+
+
+== Containerization
+
+Container images are created by adding the application and its dependencies in one or more layers on top of a base container image.
+You define the base container image and the contents of the layers in a plain text file, called a https://docs.docker.com/engine/reference/builder/[Dockerfile]. When this is done, you simply call the `docker build` command to create the new container image.
+
+
+. Make sure you are in your 'asl_transformer' working directory.
+
+. Create the file 'requirements.txt'.
+//
++
+You use this file to specify the Python packages required for the application.
+[NOTE]
+====
+The version of all the packages mentioned into this file might vary. So make sure to change the version if it creates any issue.
+====
++
+[listing]
+----
+-f https://download.pytorch.org/whl/torch_stable.html
+torch==1.8.1+cpu
+torchvision==0.9.1+cpu
+ffmpeg
+openai-whisper
+numpy
+mediapipe==0.8.9.1
+flask
+levenshtein
+regex==2023.6.3
+opencv-python
+----
+
+. Create the file 'Dockerfile'.
++
+[listing]
+----
+FROM python:3.9-slim-buster
+WORKDIR /app
+COPY . /app
+WORKDIR /app
+ADD ./requirements.txt ./requirements.txt
+RUN pip install -r requirements.txt
+EXPOSE 5000
+ENV FLASK_APP=app.py
+CMD ["flask", "run", "--host", "0.0.0.0"]
+----
+//
++
+The Dockerfile tells the `docker build` command to:
+* start with the 'python:3.9-slim-buster' base image.
+* set the working directory of container space and the copy the contents of the current directory (where the command is issued) to the '/app' directory in the image itself.
+* use '/app' as the working directory for subsequent instructions.
+* add 'requirements.txt' to '/app' & install the Python packages as per the 'requirements.txt' file created earlier (Avoid cache purge by adding requirements first).
+* expose the container port 5000.
+* run the 'app.py' script.
+
+. Build the Docker image (Make sure you are in the directory where Dockerfile resides).
++
+[source, bash]
+----
+docker build -t asl-transformer:latest .
+----
+
+. Tag the image to your Docker Hub account.
++
+[source, bash]
+----
+docker tag asl-transformer:latest <USERNAME>/asl-transformer:latest
+----
++
+Replace <USERNAME> with your Docker Hub user name.
+
+. Push the image to your https://hub.docker.com/[Docker Hub] account.
+//
++
+This will make it easier to deploy to your Kubernetes cluster.
++
+[source, bash]
+----
+sudo docker push <USERNAME>/asl-transformer:latest
+----
++
+[TIP]
+====
+Be sure you log in to your https://hub.docker.com/[Docker Hub] account before pushing the image.
+Use `docker login` on the command line to do this.
+====
+
+. Test the docker container.
+
+.. Run the container.
++
+[source, bash]
+----
+docker run -p 5000:5000 asl-transformer:latest
+----
+
+.. Open your Web browser to 'http://localhost:5000/' and verify that you can access the application.
+
+
+
+== Deployment manifests
+
+A https://kubernetes.io/docs/concepts/overview/working-with-objects/kubernetes-objects/[manifest] specifies the desired state of an object that Kubernetes will maintain.
+Manifest files are typically in YAML format for human readability.
+For this application, you create three manifest files:
+
+* 'namespace.yaml': to create a namespace where the application will be deployed.
+* 'deployment.yaml': to define the deployment configuration.
+* 'service.yaml': to expose the application so it can be accessed through a static port.
+
+You also create a 'kustomization.yaml' file, which identifies the manifests to deploy.
+
+
+. In your 'asl_transformer' working directory, create the subdirectory, 'yaml_files', and enter it.
+
+
+. Create the 'namespace.yaml' manifest file with the contents listed below to define the 'healthcare' namespace.
++
+[listing]
+----
+apiVersion: v1
+kind: Namespace
+metadata:
+name: healthcare
+----
+
+. Create the 'deployment.yaml' file with the listing below to define the deployment configuration.
++
+[listing]
+----
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  creationTimestamp: null
+  labels:
+    app: asltransformerapp
+  name: asltransformerapp
+spec:
+  replicas: 2 # Creating two PODs for our app
+  selector:
+    matchLabels:
+      app: asltransformerapp
+  strategy: {}
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: asltransformerapp
+    spec:
+      containers:
+      - image: bishal7679/asl-transformer:latest # Docker image name
+        name: asltransformercontainer # POD name
+        ports:
+        - containerPort: 5000
+          protocol: TCP
+----
++
+[NOTE]
+====
+Here `image: <USERNAME>/asl-transformer:latest` refers to the Docker image that you created and pushed to Docker Hub.
+Replace `<USERNAME>` with your Docker Hub user name.
+====
+
+. Create the 'service.yaml' file below to expose the application so it can be accessed through a static port on the node.
++
+[listing]
+----
+apiVersion: v1
+kind: Service
+metadata:
+  name: asltransformerapp-service
+  labels:
+    run: asltransformerapp
+spec:
+  type: NodePort
+  ports:
+  - port: 5000
+    targetPort: 5000
+    nodePort: 30002
+    protocol: TCP
+    name: http
+  - port: 443
+    protocol: TCP
+    name: https
+  selector:
+    app: asltransformerapp
+  sessionAffinity: ClientIP
+
+----
++
+[NOTE]
+====
+Specifying a https://kubernetes.io/docs/concepts/services-networking/service/#type-nodeport[NodePort] gives you the option to set up your own load balancing solution or expose one or more nodes' IP addresses directly.
+====
+
+. Create the 'kustomization.yaml' file below to specify the manifests to deploy.
++
+[listing]
+----
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+resources:
+- namespace.yaml
+- deployment.yaml
+- service.yaml
+----
+
+
+== Deployment
+ 
+With your manifest files defining the deployment, you need to execute the deployment to your Kubernetes cluster.
+
+. Make sure you have Kubectl https://docs.ranchermanager.rancher.io/v2.8/reference-guides/cli-with-rancher/kubectl-utility[installed and configured] to manage your Kubernetes cluster.
++
+[NOTE]
+====
+Since version 1.14, Kubectl supports management of Kubernetes objects using a https://kustomize.io/[Kustomize] kustomization file.
+====
+
+
+. Deploy your application.
++
+[source, bash]
+----
+kubectl apply -k yaml_files
+----
++
+[NOTE]
+====
+The `-k` option tells `kubectl` to process the kustomization file in the directory.
+====
+
+. Check whether all the pods are running in the 'healthcare' namespace.
++
+[source, bash]
+----
+kubectl get pods -n healthcare
+----
++
+[source, bash]
+----
+NAME                              READY   STATUS    RESTARTS   AGE
+asl-transformer-5df6b686c-dt69m   1/1     Running   0          9m31s
+asl-transformer-5df6b686c-pv288   1/1     Running   0          9m31s
+----
++
+image::edge-analytics_healthcare_pods.png[Running pods, scaledwidth="85%", align="center"]
+
+. Get all the information of the 'healthcare' namespace.
++
+[source, bash]
+----
+kubectl get all -n healthcare
+----
++
+[source, bash]
+----
+NAME                                  READY   STATUS    RESTARTS   AGE
+pod/asl-transformer-5df6b686c-dt69m   1/1     Running   0          1m52s
+pod/asl-transformer-5df6b686c-pv288   1/1     Running   0          1m52s
+
+NAME                               TYPE        CLUSTER-IP      EXTERNAL-IP   PORT(S)          AGE
+service/asl-transformer-nodeport   NodePort    10.43.45.17     <none>        5000:30002/TCP   2m10s
+
+NAME                              READY   UP-TO-DATE   AVAILABLE   AGE
+deployment.apps/asl-transformer   2/2     2            2           1m52s
+
+NAME                                         DESIRED   CURRENT   READY   AGE
+replicaset.apps/asl-transformer-5df6b686c    2         2         2       1m52s
+----
++
+image::edge-analytics_healthcare_services.png[Services, scaledwidth="85%", align="center"]
++
+[NOTE]
+====
+The deployment process might take some time depending on the resources of the cluster. Be patient!
+====
+
+. When the deployment is complete, note the 'CLUSTER-IP' and 'PORT(S)' associated with 'service/asl-transformer-nodeport'.
++
+In the example listing above, the service is available at 10.43.45.17 on port 30002.
+
+
+== Demonstration
+
+// = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
+// Illustrate functionality of the solution for a use case.
+//
+// NOTE: This demonstration text could be used to script a
+//       demonstration video.
+//
+// - Typical demonstration flow is:
+//   1. Outline the demonstration.
+//   2. Prepare the environment.
+//      This should be minimal, such as downloading some data to use.
+//   3. Perform the demonstration.
+//   4. Do not overuse screenshots.
+//   5. Clean up the environment.
+//
+// - Make use of ordered lists, code blocks, admonitions, and screenshots.
+//
+// = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
+Get started using {other-product1}:
+
+. Open your Web browser to the IP and port of the service (in our example, it would be http://10.43.45.17:30002).
+
+. Then you can choose any mp3 file with properly audible each words or write the available words manually and press Transcribe button.
++
+image::edge-analytics_asl_transformer.png[Dashboard, scaledwidth="95%", align="center"]
+
+. The Transcribed text will automatically be converted into ASL as per the algorithm.
+
+. Click __Submit__.
++
+image::edge-analytics_asl_transformer_animation.png[Animation, scaledwidth="95%", align="center"]
+
+
+== Setup CI/CD Workflow
+
+Firstly, a Github Action workflow file has been created which will detect any changes on the 'docker-build' branch of your repository and eventually push those changes to your DockerHub repository and update the old docker image with new changes automatically.
+
+. Create that workflow file to auto-publish docker image.
++
+[source, bash]
+----
+name: Publishing Docker image
+
+on:
+  push:
+    branches: [docker-build] # detect any changes for docker-build branch of your repository
+
+jobs:
+  push_to_registry:
+    name: Push Docker image to Docker Hub
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out the repo
+        uses: actions/checkout@v3
+      
+      - name: Log in to Docker Hub
+        uses: docker/login-action@f4ef78c080cd8ba55a85445d5b36e214a81df20a
+        with:
+          username: ${{ secrets.DOCKER_USERNAME }}  # secrets should be set up in the repository scope
+          password: ${{ secrets.DOCKER_PASSWORD }}
+      
+      - name: Extract metadata (tags, labels) for Docker
+        id: meta
+        uses: docker/metadata-action@9ec57ed1fcdbf14dcef7dfbe97b2010124a938b7
+        with:
+          images: bishal7679/asl-transformer
+      
+      - name: Build and push Docker image
+        uses: docker/build-push-action@3b5e8027fcad23fda98b2e3ac259d8d67585f671
+        with:
+          context: .
+          file: ./Dockerfile
+          tags: bishal7679/asl-transformer:latest
+          push: true
+          labels: ${{ steps.meta.outputs.labels }}
+----
++
+[NOTE]
+====
+In order to create this workflow file, go to the 'Action' section of your repository. Then paste the above yaml code and commit changes.
+====
+
+Secondly, We will create another workflow file to auto deploy our code changes into production where {other-product1} is running live on AWS. Follow this https://docs.aws.amazon.com/AmazonECS/latest/developerguide/create-ec2-cluster-console-v2.html[Link]
+
+. Create an AWS ECS cluster on the first step by filling all the container details with the {other-product1} docker image.
++
+image::edge-analytics_asl_transformer_ECS_Cluster.png[ECS-Cluster, scaledwidth="85%", align="center"]
+
+. Then set up a Loadbalance service while setting up the cluster
++
+image::edge-analytics_asl_transformer_EcsLoadbalancer_service.png[ECS-Loadbalancer, scaledwidth="85%", align="center"]
+
+. After creating ECS cluster, now setup another workflow file on your repository to auto deploy into ECS cluster.
++
+[source, bash]
+----
+name: Deploy to Amazon ECS
+
+on:
+  push:
+    branches: [ "docker-build" ]
+
+env:
+  AWS_REGION: us-east-1  # set this to your preferred AWS region, e.g. us-west-1
+  DOCKER_REGISTRY: bishal7679
+  DOCKER_REPOSITORY: asl-transformer
+  ECS_SERVICE: asltransformer-cont-service          # set this to your Amazon ECS service name
+  ECS_CLUSTER: asltransformer-cluster                 # set this to your Amazon ECS cluster name
+  ECS_TASK_DEFINITION: asl-run-task-definition # set this to the path to your Amazon ECS task definition
+                                               # file, e.g. .aws/task-definition.json
+  CONTAINER_NAME: asltransformer-cont          # set this to the name of the container in the
+                                               # containerDefinitions section of your task definition
+                                             
+jobs:
+  deploy:
+    name: Deploy
+    runs-on: ubuntu-latest
+    environment: production
+
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v3
+
+    - name: Configure AWS credentials
+      uses: aws-actions/configure-aws-credentials@v1
+      with:
+        aws-access-key-id: $ {{ secrets.AWS_ACCESS_KEY_ID }} # NEED TO SETUP IN GITHUB LATER
+        aws-secret-access-key: $ {{ secrets.AWS_SECRET_ACCESS_KEY }} # NEED TO SETUP IN GITHUB LATER
+        aws-region: ${{ env.AWS_REGION }}
+      
+    - name: Log in to Docker Hub
+      uses: docker/login-action@f4ef78c080cd8ba55a85445d5b36e214a81df20a
+      with:
+          username: ${{ secrets.DOCKER_USERNAME }}
+          password: ${{ secrets.DOCKER_PASSWORD }}
+      
+    - name: Extract metadata (tags, labels) for Docker
+      id: meta
+      uses: docker/metadata-action@9ec57ed1fcdbf14dcef7dfbe97b2010124a938b7
+      with:
+          images: bishal7679/asl-transformer
+      
+    - name: Build and push Docker image
+      uses: docker/build-push-action@3b5e8027fcad23fda98b2e3ac259d8d67585f671
+      with:
+          context: .
+          file: ./Dockerfile
+          tags: bishal7679/asl-transformer:latest
+          push: true
+          labels: $ {{ steps.meta.outputs.labels }}
+
+    - name: Get the build-image output
+      id: build-image-output
+      env:
+        IMAGE_TAG: latest
+      run:
+        echo "image=$DOCKER_REGISTRY/$DOCKER_REPOSITORY:$IMAGE_TAG" >> $GITHUB_OUTPUT
+        
+    - name: Download task definition
+      run: |
+        aws ecs describe-task-definition --task-definition $ECS_TASK_DEFINITION --query taskDefinition > task-definition.json
+    - name: Fill in the new image ID in the Amazon ECS task definition
+      id: task-def
+      uses: aws-actions/amazon-ecs-render-task-definition@v1
+      with:
+        task-definition: ./task-definition.json
+        container-name: ${{ env.CONTAINER_NAME }}
+        image: ${{ steps.build-image-output.outputs.image }}
+
+    - name: Deploy Amazon ECS task definition
+      uses: aws-actions/amazon-ecs-deploy-task-definition@v1
+      with:
+        task-definition: ${{ steps.task-def.outputs.task-definition }}
+        service: ${{ env.ECS_SERVICE }}
+        cluster: ${{ env.ECS_CLUSTER }}
+        wait-for-service-stability: false
+----
+
+. Now all the CI/CD setup has been completed.
+
+. Open your Web browser and put the Loadbalancer service DNS name with port which you created earlier.
+
+. Finally {other-product1} is up and running on AWS and from now on any code changes will be continuously deployed through the CI/CD pipeline and instant live on production.
++
+image::edge-analytics_asl_transformer_running_aws.png[ECS-Loadbalancer, scaledwidth="85%", align="center"]
+
+
+== Summary
+
+// = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
+// Summarize:
+// - Motivation for the guide (1 sentence)
+// - What was covered (1-2 sentences)
+// - Next steps (unordered list of 2-4 further learning resources)
+// = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
+
+Analytics at the edge is of growing importance in the healthcare space.
+Organizations realize they can achieve faster insights, maintain better security practices, and lower costs by deploying certain analytics workloads closer to or even at the edge.
+The scale and agility of cloud native architectures and tooling, like Kubernetes, make this possible.
+
+In this guide, you learned how to containerize an ML application and deploy it into a Kubernetes environment managed by Rancher by SUSE.
+
+Below are listed a few resources to help you continue your exploration of Rancher and K3s for edge analytics:
+
+* https://github.com/bishal7679/ASL-Transformer[GitHub repository with the code]
+* https://documentation.suse.com/trd/kubernetes/[SUSE Technical Reference Documentation: Kubernetes]
+* https://documentation.suse.com/trd/kubernetes/html/kubernetes_ri_k3s-slemicro/index.html[Introductory Deployment of K3s]
+* https://www.suse.com/community/[SUSE & Rancher Community]
+
+
+
+
+
+// = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
+// Do not modify below this break.
+// = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
+
+++++
+<?pdfpagebreak?>
+++++
+
+
+:leveloffset: 0
+
+== Legal notice
+include::common_trd_legal_notice.adoc[]
+
+++++
+<?pdfpagebreak?>
+++++
+
+
+:leveloffset: 0
+include::common_gfdl1.2_i.adoc[]
+
+//end
